@@ -6,7 +6,7 @@
 
 | PROTOCOL | TYPE | STATUS |
 | :--- | :--- | :--- |
-| **Voting DApp** | Solidity / Ethereum | 🚧 **Pending Upload** |
+| **Voting DApp** | Solidity / Ethereum |✔️ **Done** |
 | **DeFi Staking Pool** | Smart Contract | 🚧 **Planned** |
 | **NFT Minting Engine** | ERC-721 | 🚧 **Planned** |
 
