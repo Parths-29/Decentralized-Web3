@@ -4,11 +4,11 @@
 
 ### ⛓️ CHAIN INDEX
 
-| PROTOCOL | TYPE | STATUS |
+| PROJECTS | TYPE | STATUS |
 | :--- | :--- | :--- |
 | **Voting DApp** | Solidity / Ethereum |✔️ **Done** |
-| **DeFi Staking Pool** | Smart Contract | 🚧 **Planned** |
-| **NFT Minting Engine** | ERC-721 | 🚧 **Planned** |
+| **Healthcare** | Smart Contract | 🚧 **Planned** |
+
 
 ---
 
