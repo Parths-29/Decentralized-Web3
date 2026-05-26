@@ -3,78 +3,123 @@
 @tailwind utilities;
 
 :root {
-  --primary: #0ea5e9;
-  --primary-dark: #0284c7;
-  --teal: #0d9488;
-  --teal-light: #ccfbf1;
-  --blue-light: #e0f2fe;
-  --bg: #f0f9ff;
-  --gradient: linear-gradient(135deg, #0ea5e9 0%, #0d9488 100%);
-  --shadow-md: 0 4px 16px rgba(14,165,233,0.12);
+  --black: #0A0A0B;
+  --white: #FAFAF9;
+  --surface: #F4F4F2;
+  --elevated: #FFFFFF;
+  
+  --accent: #0d9488;
+  --accent-rgb: 13, 148, 136;
+  
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+  
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   font-family: 'DM Sans', sans-serif;
-  background: var(--bg);
-  color: #0f172a;
+  background: var(--white);
+  color: var(--black);
+  font-feature-settings: "ss01", "cv01", "kern";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.gradient-bg { background: var(--gradient); }
-.gradient-text {
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+html { scroll-behavior: smooth; }
+
+/* Premium Typography Scale */
+.text-hero { font-size: clamp(48px, 6vw, 72px); font-weight: 700; letter-spacing: -0.04em; line-height: 1; }
+.text-h1 { font-size: clamp(40px, 5vw, 56px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; }
+.text-h2 { font-size: clamp(28px, 4vw, 36px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
+.text-h3 { font-size: clamp(20px, 3vw, 24px); font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; }
+.text-body-lg { font-size: 18px; font-weight: 400; letter-spacing: -0.01em; line-height: 1.65; max-width: 68ch; }
+.text-body { font-size: 15px; font-weight: 400; letter-spacing: 0em; line-height: 1.6; max-width: 68ch; }
+.text-caption { font-size: 13px; font-weight: 500; letter-spacing: 0.02em; line-height: 1.4; }
+.text-label { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* Medical Data Typography */
+.text-mono-hash { font-family: 'Geist Mono', monospace; font-size: 13px; letter-spacing: -0.01em; }
+.text-drug-name { font-weight: 600; color: var(--black); }
+.text-drug-dose { font-weight: 500; color: theme('colors.slate.500'); }
+
+/* Animations - Reveal (Landing Page Only) */
+@keyframes revealUp {
+  from { clip-path: inset(100% 0 0 0); transform: translateY(16px); opacity: 0; }
+  to   { clip-path: inset(0% 0 0 0); transform: translateY(0); opacity: 1; }
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: #f1f5f9; }
-::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+.stagger > * { animation: revealUp 0.8s var(--ease-out-expo) both; }
+.stagger > *:nth-child(1) { animation-delay: 0ms; }
+.stagger > *:nth-child(2) { animation-delay: 80ms; }
+.stagger > *:nth-child(3) { animation-delay: 160ms; }
+.stagger > *:nth-child(4) { animation-delay: 240ms; }
+.stagger > *:nth-child(5) { animation-delay: 320ms; }
 
-/* Animations */
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
-@keyframes pulse-ring { 0%,100%{opacity:1;} 50%{opacity:.5;} }
-
-.animate-spin { animation: spin 0.8s linear infinite; }
-.animate-fade { animation: fadeIn 0.3s ease; }
-
-/* Chat bubble */
-.chat-bubble-ai {
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 4px 14px 14px 14px;
-  padding: 10px 14px;
-  font-size: 13.5px;
-  line-height: 1.6;
+/* Interactive Hover Patterns */
+.btn-premium {
+  transition: background 0.2s var(--ease-in-out),
+              box-shadow 0.2s var(--ease-in-out),
+              transform 0.15s var(--ease-out-expo);
 }
-.chat-bubble-user {
-  background: var(--gradient);
-  color: white;
-  border-radius: 14px 4px 14px 14px;
-  padding: 10px 14px;
-  font-size: 13.5px;
-  line-height: 1.6;
+.btn-premium:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(13, 148, 136, 0.35); /* teal-glow */
+}
+.btn-premium:active {
+  transform: translateY(1px);
+  box-shadow: none;
 }
 
-/* Toggle switch */
-.toggle-input:checked + .toggle-track { background: #0d9488; }
-.toggle-input:checked + .toggle-track .toggle-thumb { transform: translateX(20px); }
+.card-lift {
+  transition: transform 0.25s var(--ease-out-expo),
+              box-shadow 0.25s var(--ease-out-expo);
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 20px 48px rgba(0,0,0,0.10);
+}
 
-/* Timeline line */
-.timeline-container::before {
+.nav-link-bottom {
+  position: relative;
+  transition: color 0.2s;
+}
+.nav-link-bottom::before {
   content: '';
   position: absolute;
-  left: 15px; top: 0; bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, #0ea5e9, #0d9488);
-  border-radius: 2px;
+  inset: 0;
+  background: rgba(0,0,0,0.04);
+  border-radius: inherit;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.2s var(--ease-out-expo);
+  z-index: -1;
 }
+.nav-link-bottom:hover::before { transform: scaleY(1); }
 
-/* Stat card top border */
-.stat-blue::before { content:''; position:absolute; top:0;left:0;right:0;height:3px; background:linear-gradient(90deg,#0ea5e9,#0d9488); border-radius:12px 12px 0 0; }
-.stat-teal::before { content:''; position:absolute; top:0;left:0;right:0;height:3px; background:linear-gradient(90deg,#0d9488,#06b6d4); border-radius:12px 12px 0 0; }
-.stat-amber::before { content:''; position:absolute; top:0;left:0;right:0;height:3px; background:linear-gradient(90deg,#f59e0b,#ef4444); border-radius:12px 12px 0 0; }
-.stat-purple::before { content:''; position:absolute; top:0;left:0;right:0;height:3px; background:linear-gradient(90deg,#8b5cf6,#6366f1); border-radius:12px 12px 0 0; }
+/* Blockchain Spin Loader */
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.animate-spin-slow { animation: spin-slow 1.5s linear infinite; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.25); }
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
